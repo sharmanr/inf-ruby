@@ -373,13 +373,17 @@ Type \\[describe-mode] in the process buffer for the list of commands."
   ;; with `run-python', `run-octave', `run-lisp' and so on.
   ;; We're keeping both it and `inf-ruby' for backward compatibility.
   (interactive)
-  (or command
-      (setq command (cdr (assoc inf-ruby-default-implementation
-                                inf-ruby-implementations))))
-  (if (functionp command)
-      (setq command (funcall command)))
-  (run-ruby-new command (or name "ruby")))
-  
+  (run-ruby-or-pop-to-buffer
+   (let ((command
+          (or command
+              (cdr (assoc inf-ruby-default-implementation
+                          inf-ruby-implementations)))))
+     (if (functionp command)
+         (funcall command)
+       command))
+   (or name "ruby")
+   (or (inf-ruby-buffer)
+       inf-ruby-buffer)))
 
 (defun run-ruby-new (command &optional name)
   "Create a new inferior Ruby process in a new buffer.

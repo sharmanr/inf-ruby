@@ -1,5 +1,7 @@
 `inf-ruby` provides a REPL buffer connected to a Ruby subprocess.
 
+This is a minor change to nonsequitur/inf-ruby
+
 ## Installation
 
 ### Via package.el
@@ -144,4 +146,4 @@ users will have to do it manually.
 
   Put `Pry.config.correct_indent = false if ENV["INSIDE_EMACS"]` into your `~/.pryrc`.
 
-Please report problems at <http://github.com/nonsequitur/inf-ruby/issues>.
+
